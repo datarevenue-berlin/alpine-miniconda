@@ -9,6 +9,10 @@ The official Miniconda image [weigth 158MB](https://microbadger.com/images/conti
 
 A special user is create with uid 1000 and can be use with any public user without security breach.
 
+# Changelog
+## 4.5.1 
+- Updated Miniconda version to 4.5.1
+- Set conda-forge as top prio channel
 
 # Usage
 

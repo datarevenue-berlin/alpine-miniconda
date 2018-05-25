@@ -39,10 +39,10 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Configure Miniconda
-ENV MINICONDA_VER 4.2.12
+ENV MINICONDA_VER 4.5.1
 ENV MINICONDA Miniconda3-$MINICONDA_VER-Linux-x86_64.sh
 ENV MINICONDA_URL https://repo.continuum.io/miniconda/$MINICONDA
-ENV MINICONDA_MD5_SUM d0c7c71cc5659e54ab51f2005a8d96f3
+ENV MINICONDA_MD5_SUM 0c28787e3126238df24c5d4858bd0744
 
 # Create user with UID=1000 and in the 'users' group
 RUN adduser -s /bin/bash -u $CONTAINER_UID -D $CONTAINER_USER && \
@@ -61,8 +61,8 @@ RUN cd /tmp && \
     $CONDA_DIR/bin/conda install --yes conda==$MINICONDA_VER
 
 RUN conda upgrade -y pip && \
+    conda config --add channels conda-forge && \
     conda clean --all
-
 
 USER root
 
@@ -71,5 +71,5 @@ WORKDIR /home/$CONTAINER_USER/
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "/bin/bash" ]
 
-# Switch back to jovyan to avoid accidental container runs as root
+# Switch back to drtools to avoid accidental container runs as root
 USER $CONTAINER_USER
